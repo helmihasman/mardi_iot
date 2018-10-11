@@ -1,0 +1,41 @@
+script(type='text/javascript', src='/adminlte/plugins/jQuery/jquery-2.2.3.min.js')
+script(type='text/javascript', src='/adminlte/bootstrap/js/bootstrap.min.js')
+script(type='text/javascript', src='/adminlte/plugins/datatables/jquery.dataTables.min.js')
+script(type='text/javascript', src='/adminlte/plugins/datatables/dataTables.bootstrap.min.js')
+script(type='text/javascript', src='/adminlte/plugins/slimScroll/jquery.slimscroll.min.js')
+script(type='text/javascript', src='/adminlte/plugins/fastclick/fastclick.js')
+script(type='text/javascript', src='/adminlte/dist/js/app.min.js')
+script(type='text/javascript', src='/adminlte/dist/js/demo.js')
+script(type='text/javascript',src='/socket.io/socket.io.js')
+script(type='text/javascript').
+    $(document).ready(function() {
+     window.print();
+    } );
+    $(document).ready(function() {
+     $('#example').DataTable( {
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "searching": false
+    } );
+    } );
+    
+    $(document).ready(function() {
+     $('#example2').DataTable( {
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "searching": false
+    } );
+    } );
+    
+    $(document).ready(function() {
+     $('#environment_table').DataTable({
+        "order": [[ 0, "desc" ]]
+    } );
+    } );
+    
+script(type='text/javascript').
+  function goBack() {
+    window.history.back();
+    }

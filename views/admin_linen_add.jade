@@ -1,0 +1,71 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Linen
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Linen > Add Linen
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Add Linen
+                    
+            .box-body
+                form.form-horizontal(role='form',method='post' action='/linen/add')
+                  - if (messages.msg_error) 
+                                    .alert.alert-danger.alert-dismissable 
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert! 
+                                        | !{messages.msg_error}
+                  div.form-group
+                    label(for="tag_id",class="col-sm-2 control-label") Tag ID
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="tag_id",name="tag_id",placeholder="Tag ID",autofocus)
+                  div.form-group
+                    label(for="category",class="col-sm-2 control-label") Category
+                    div.col-sm-6
+                      select(id="category",name="category").col-sm-6
+                        option(value="") Select One
+                        option(value="Pillow Case") Pillow Case
+                        option(value="Patient gown") Patient gown
+                        option(value="Curtain") Curtain
+                        option(value="Bedsheet") Bedsheet
+                        option(value="Baby cloth") Baby cloth
+                  div.form-group
+                    label(for="purchase_date",class="col-sm-2 control-label") Purchase Date
+                    div.col-sm-6
+                      input(type="date",class="form-control",id="purchase_date",name="purchase_date",placeholder="Purchase Date")
+                  div.form-group
+                    label(for="color",class="col-sm-2 control-label") Color
+                    div.col-sm-6
+                      select(id="color",name="color").col-sm-6
+                        option(value="") Select One
+                        option(value="Green") Green
+                        option(value="White") White
+                        option(value="Black") Black
+                        option(value="Pink") Pink
+                        option(value="Blue") Blue
+                  div.form-group
+                    label(for="size",class="col-sm-2 control-label") Size
+                    div.col-sm-6
+                      select(id="size",name="size").col-sm-6
+                        option(value="") Select One
+                        option(value="S") S
+                        option(value="M") M
+                        option(value="L") L
+                        option(value="XL") XL
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",name="save_btn",style="align:right") Save
+                      |&nbsp&nbsp&nbsp
+                      button(type="button",class="btn btn-danger",id="cancel_btn",style="align:right",onclick='goBack()') Cancel

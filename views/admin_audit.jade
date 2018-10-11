@@ -1,0 +1,39 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Audit
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Audit 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Audit Trail&nbsp&nbsp
+                    
+                        
+            .box-body
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th User
+                       th Action
+                       th Time
+                       
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.name}
+                                        td #{row.user_action}
+                                        td #{row.new_date}
+                                        

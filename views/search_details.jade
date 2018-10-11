@@ -1,0 +1,42 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Search Assets
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Search 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Search
+                small.pull-right
+                   a(href='/search') Back
+                    
+                        
+            .box-body
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Tag Id
+                       th Date
+                       th Location
+
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row,index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.addr}
+                                        td #{row.date}
+                                        td #{row.location}
+                                        
+                                            

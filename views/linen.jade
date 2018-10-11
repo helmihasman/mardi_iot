@@ -1,0 +1,81 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Linen
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Linen 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Linen Scanned&nbsp&nbsp
+                    
+                        
+            .box-body
+              - var count1 = 1;
+              - var count2 = 1;
+                .nav-tabs-custom
+                    ul.nav.nav-tabs
+                      li.active
+                        a(href='#tab_1', data-toggle='tab') Soiled Linen
+                      li
+                        a(href='#tab_2', data-toggle='tab') Clean Linen
+                    .tab-content
+                      #tab_1.tab-pane.active
+                        p#date_filter.pull-right
+                            span#date-label-from.date-label Search by date: 
+                            input#datepicker_from.date_range_filter.date(type='date')
+                        table(id="linen_table1",class="table table-bordered table-striped")
+                            thead
+                              tr
+                                th No
+                                th Time Scanned
+                                th Amount
+                                th Details
+                                //th Details
+
+                            tbody
+                                if messages.msg_error
+                                         | !{messages.msg_error}
+                                     else
+                                         for row, index in data
+                                           if row.soil !== 0
+                                             tr
+                                                 td #{count1++}
+                                                 td #{row.new_date}
+                                                 td #{row.soil}
+                                                 td 
+                                                    a(href='/linen/#{row.time}') Show Details
+                      #tab_2.tab-pane
+                        p#date_filter.pull-right
+                            span#date-label-from.date-label Search by date: 
+                            input#datepicker_from2.date_range_filter.date(type='date')
+                        table(id="linen_table2",class="table table-bordered table-striped")
+                            thead
+                              tr
+                                th No
+                                th Time Scanned
+                                th Amount
+                                th Details
+                                //th Details
+
+                            tbody
+                                if messages.msg_error
+                                         | !{messages.msg_error}
+                                     else
+                                         for row, index in data
+                                           if row.clean !== 0
+                                             tr
+                                                 td #{count2++}
+                                                 td #{row.new_date}
+                                                 td #{row.clean}
+                                                 td 
+                                                    a(href='/linen/#{row.time}') Show Details
+                                        
+                                            

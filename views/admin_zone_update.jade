@@ -1,0 +1,45 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Zone
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Zone > Update Zone
+            
+    section.content
+      for row, index in data
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Update Zone
+                    
+            .box-body
+                form.form-horizontal(role='form',method='post' action='/admin_zone/update/#{row.zone_id}')
+                  - if (messages.msg_error) 
+                                    .alert.alert-danger.alert-dismissable 
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert! 
+                                        | !{messages.msg_error} 
+                  div.form-group
+                    label(for="username",class="col-sm-2 control-label") Zone Name
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="zone_name",name="zone_name",placeholder="Zone Name",autofocus,value="#{row.zone_name}")
+                      input(type="hidden",id="zone_id",name="zone_id",value="#{row.zone_id}")
+                  div.form-group
+                    label(for="name",class="col-sm-2 control-label") Reader Name
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="reader_name",name="reader_name",placeholder="Reader Name",value="#{row.zone_reader_id}")
+                  
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",name="save_btn",style="align:right") Save
+                      |&nbsp&nbsp&nbsp
+                      button(type="button",class="btn btn-danger",id="cancel_btn",style="align:right",onclick='goBack()') Cancel

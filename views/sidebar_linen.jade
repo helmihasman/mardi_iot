@@ -1,0 +1,46 @@
+aside.main-sidebar
+    section.sidebar
+        .user-panel
+            .pull-left.image
+                img(src='/adminlte/dist/img/user.png',alt='User Image').img-circle
+            .pull-left.info
+                p #{session.passport.user.username}
+                a(href='#')
+                    i.fa.fa-circle.text-success 
+                    | Online
+        form(action='#',method='get').sidebar-form
+            .input-group
+                span.input-group-btn
+                       
+        ul.sidebar-menu
+            li.treeview(class=(title === 'Linen' ? 'active' : ''))
+                a(href='/dashboard_linen')
+                    i.fa.fa-folder
+                    span
+                        | Linen
+                    span.pull-right-container
+            li.treeview(class=(title === 'Report' ? 'active' : ''))
+                    a(href='/report_home_linen')
+                        i.fa.fa-pie-chart
+                        span
+                            | Report
+                        span.pull-right-container 
+            li.treeview(class=(title === 'Settings' ? 'active' : ''))
+                    a(href='/admin_users/update/#{session.passport.user.users_id}')
+                        i.fa.fa-edit
+                        span
+                            | Settings
+                        span.pull-right-container
+            li.treeview(class=(title === 'Admin Users' ? 'active' :title === 'Add Admin Users' ? 'active' :title === 'Admin Department' ? 'active' :title === 'Add Admin Department' ? 'active' :title === 'Admin Assets' ? 'active' :title === 'Add Admin Assets' ? 'active' :title === 'Admin Monitoring' ? 'active' :title === 'Admin Gateway' ? 'active' :title === 'Admin Unauthorized' ? 'active':title === 'Admin Zone' ? 'active' :title === 'Add Admin Gateway' ? 'active' :title === 'Admin Linen' ? 'active' : ''))
+                a(href='#')
+                    i.fa.fa-laptop
+                    span
+                        | Admin
+                    span.pull-right-container
+                        i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                    li(class=(title === 'Admin Linen' ? 'active' :title === 'Add Linen' ? 'active' : ''))
+                        a(href='/admin_linen')
+                            i.fa.fa-circle-o
+                            | Linen Management
+                    

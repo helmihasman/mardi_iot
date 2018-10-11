@@ -1,0 +1,88 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Zone
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Zone 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Zone List&nbsp&nbsp
+                    a.btn.btn-primary.btn-xs.btn-flata(href='/admin_zone_add')
+                      i.fa.fa-plus
+                        
+            .box-body
+                - if(messages.msg_info)
+                    .alert.alert-success.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-check
+                            | Success!
+                        | !{messages.msg_info}
+                - if(messages.msg_error)
+                    .alert.alert-danger.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-ban
+                            | Alert!
+                        | !{messages.msg_error}
+                        
+                //form(role='form',method='post' action='/admin_users/search')
+                  div.form-group
+                    label(for="name",class="col-sm-2 control-label") Name
+                    div.col-sm-4
+                      input(type="text",class="form-control",id="name",name="name",placeholder="Name")
+                  div.form-group
+                    label(for="staff_id",class="col-sm-2 control-label") Staff ID
+                    div.col-sm-4
+                      input(type="text",class="form-control",id="staff_id",name="staff_id",placeholder="Staff ID")
+                      |&nbsp
+                  div.form-group
+                    label(for="status",class="col-sm-2 control-label") Status
+                    div.col-sm-4
+                      select(id="status",name="status").col-sm-6
+                        option(value='') Select One
+                        option(value="New") New
+                        option(value="Active") Active
+                        option(value="Disable") Disable
+                  div.form-group
+                    div.col-sm-4
+                      button(type="submit",class="btn btn-primary",id="submit_btn",style="align:right") Search
+                  //p= JSON.stringify(data)
+                  //p #{data}
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Zone Name
+                       th Reader Name
+                       th Action
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.zone_name}
+                                        td #{row.zone_reader_id}
+                                        td
+                                            div(style='display:inline-block')
+                                                a(href='/admin_zone/update/#{row.zone_id}').btn.btn-sm.btn-primary
+                                                        i.fa.fa-edit
+                                            | 
+                                            div(style='display:inline-block')
+                                                form(method='post', action='/admin_zone/delete/#{row.zone_id}')
+                                                    input(type="hidden",name="_method", value="DELETE")
+                                                    button.btn.btn-sm.btn-danger(type='submit',onclick="return confirm('Are you sure you want to delete?');")
+                                                        i.fa.fa-remove
+

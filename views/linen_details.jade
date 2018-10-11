@@ -1,0 +1,38 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Linen
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Linen 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Linen for #{new_date}&nbsp&nbsp
+                    
+                        
+            .box-body
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th(width='10%') No
+                       th Linen ID
+                       th Linen Category
+
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row,index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.linen_uuid}
+                                        td #{row.linen_category}
+                                        
+                                            

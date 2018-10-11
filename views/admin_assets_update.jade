@@ -1,0 +1,166 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Assets
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Assets > Update Assets
+            
+    section.content
+      for row, index in data
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Update Assets
+                    
+            .box-body
+                form.form-horizontal(enctype="multipart/form-data",role='form',method='post' action='/admin_assets/update/#{row.assets_id}')
+                  - if (messages.msg_error) 
+                                    .alert.alert-danger.alert-dismissable 
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert! 
+                                        | !{messages.msg_error}
+                                        
+                  //div.form-group
+                    label(for="rfid",class="col-sm-2 control-label") Image
+                    div.col-sm-6
+                      input(type="file",class="form-control",id="assets_img",name="assets_img")
+                  div.form-group
+                    label(for="rfid",class="col-sm-2 control-label") RFID
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="rfid",name="rfid",placeholder="RFID",value="#{row.assets_rfid}",required)
+                  div.form-group
+                    label(for="type",class="col-sm-2 control-label") Type
+                    div.col-sm-6
+                      select(id="inventory_type",name="inventory_type",required).col-sm-6
+                        option(value="BEMS") BEMS
+                        option(value="FEMS") FEMS
+                  div.form-group
+                    label(for="asset_no",class="col-sm-2 control-label") Asset No
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="asset_no",name="asset_no",placeholder="Asset No",value="#{row.assets_no}",required)
+                  div.form-group
+                    label(for="dept_code",class="col-sm-2 control-label") Dept Code
+                    div.col-sm-6
+                      select(id="dept_code",name="dept_code",required).col-sm-6
+                        for row, index in department 
+                          option(value="#{row.dept_id}") #{row.dept_desc}
+                  div.form-group
+                    label(for="type",class="col-sm-2 control-label") Zone RFID
+                    div.col-sm-6
+                      select(id="zone_rfid",name="zone_rfid",required).col-sm-6
+                        for row, index in zone 
+                          option(value="#{row.zone_id}") #{row.zone_name}
+                  div.form-group
+                    label(for="room_code",class="col-sm-2 control-label") Room Code
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="room_code",name="room_code",placeholder="Room Code",value="#{row.assets_room_code}",required)
+                  div.form-group
+                    label(for="room_desc",class="col-sm-2 control-label") Room Desc
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="room_desc",name="room_desc",placeholder="Room Desc",value="#{row.assets_room_desc}",required)
+                  div.form-group
+                    label(for="item_desc",class="col-sm-2 control-label") Item Desc
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="item_desc",name="item_desc",placeholder="Item Desc",value="#{row.assets_item_desc}",required)
+                  div.form-group
+                    label(for="manufacturer",class="col-sm-2 control-label") Manufacturer
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="manufacturer",name="manufacturer",placeholder="Manufacturer",value="#{row.assets_manufacturer}",required)
+                  div.form-group
+                    label(for="make",class="col-sm-2 control-label") Make
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="make",name="make",placeholder="Make",value="#{row.assets_make}",required)
+                  div.form-group
+                    label(for="model",class="col-sm-2 control-label") Model
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="model",name="model",placeholder="Model",value="#{row.assets_model}",required)
+                  div.form-group
+                    label(for="brand",class="col-sm-2 control-label") Brand
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="brand",name="brand",placeholder="Brand",value="#{row.assets_brand}",required)
+                  div.form-group
+                    label(for="serial_no",class="col-sm-2 control-label") Serial No
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="serial_no",name="serial_no",placeholder="Serial No",value="#{row.assets_serial_no}",required)
+                  div.form-group
+                    label(for="supplier",class="col-sm-2 control-label") Supplier
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="supplier",name="supplier",placeholder="Supplier",value="#{row.assets_supplier}",required)
+                  div.form-group
+                    label(for="type_code",class="col-sm-2 control-label") Type Code
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="type_code",name="type_code",placeholder="Type Code",value="#{row.assets_type_code}",required)
+                  div.form-group
+                    label(for="warranty_start",class="col-sm-2 control-label") Warranty Start
+                    div.col-sm-6
+                     - var d = new Date(row.assets_warranty_start);
+                     - var year = d.getUTCFullYear();
+                     - var month = d.getUTCMonth()+1;
+                     - var day = d.getUTCDate()+1;
+                     - if (month.toString().length == 1) month = "0" + month;
+                     - if (day.toString().length == 1) day = "0" + day;
+                     - var warranty_start = year+'-'+month+'-'+day;
+                     
+                      input(type="date",class="form-control",id="warranty_start",name="warranty_start",placeholder="Warranty Start",value="#{warranty_start}",required)
+                  div.form-group
+                    label(for="warranty_end",class="col-sm-2 control-label") Waranty End
+                    div.col-sm-6
+                     - var d = new Date(row.assets_warranty_end);
+                     - var year = d.getUTCFullYear();
+                     - var month = d.getUTCMonth()+1;
+                     - var day = d.getUTCDate()+1;
+                     - if (month.toString().length == 1) month = "0" + month;
+                     - if (day.toString().length == 1) day = "0" + day;
+                     - var warranty_end = year+'-'+month+'-'+day;
+                      input(type="date",class="form-control",id="warranty_end",name="warranty_end",placeholder="Warranty End",value="#{warranty_end}",required)
+                  div.form-group
+                    label(for="acceptance_date",class="col-sm-2 control-label") Acceptance Date
+                    div.col-sm-6
+                     - var d = new Date(row.assets_acceptance_date);
+                     - var year = d.getUTCFullYear();
+                     - var month = d.getUTCMonth()+1;
+                     - var day = d.getUTCDate()+1;
+                     - if (month.toString().length == 1) month = "0" + month;
+                     - if (day.toString().length == 1) day = "0" + day;
+                     - var acceptance_date = year+'-'+month+'-'+day;
+                      input(type="date",class="form-control",id="acceptance_date",name="acceptance_date",placeholder="Acceptance Date",value="#{acceptance_date}",required)
+                  div.form-group
+                    label(for="task_code",class="col-sm-2 control-label") Task Code
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="task_code",name="task_code",placeholder="Task Code",value="#{row.assets_task_code}",required)
+                  div.form-group
+                    label(for="frequency",class="col-sm-2 control-label") Frequency
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="frequency",name="frequency",placeholder="Frequency",value="#{row.assets_frequency}",required)
+                  div.form-group
+                    label(for="order_no",class="col-sm-2 control-label") Order No
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="order_no",name="order_no",placeholder="Order No",value="#{row.assets_order_no}",required)
+                  div.form-group
+                    label(for="warranty",class="col-sm-2 control-label") Warranty
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="warranty",name="warranty",placeholder="Warranty",value="#{row.assets_warranty}",required)
+                  div.form-group
+                    label(for="variation",class="col-sm-2 control-label") Variation
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="variation",name="variation",placeholder="Variation",value="#{row.assets_variation}",required)
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label") Asset Owner
+                    div.col-sm-6
+                      select(id="asset_owner",name="asset_owner",required).col-sm-6
+                        option(value="Admin") Admin
+                        option(value="Admin2") Admin2
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Save
+                      |&nbsp&nbsp&nbsp
+                      button(type="button",class="btn btn-danger",id="cancel_btn",style="align:right",onclick='goBack()') Cancel

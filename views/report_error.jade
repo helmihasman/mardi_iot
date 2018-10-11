@@ -1,0 +1,43 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Report
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Report 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Report
+                small.pull-right
+                   a(href='/report') Back
+                    
+                        
+            .box-body
+                //- console.log("paaggee = "+JSON.stringify(data));
+                //- console.log("paaggee = "+data[0].value.payload.tag_1.tag_id);
+                - console.log("paaggee = "+JSON.stringify(data));
+                - var count1 = 1;
+                - var count2 = 1;
+                //- var size = data.value.payload.tag.length;
+                
+                table(id="example",class="table table-bordered table-striped")
+                    thead
+                      tr
+                        th No
+                        th Time Scanned
+                        th Amount
+                        th Details
+                        //th Details
+
+                    tbody
+                        if messages.msg_error
+                            | !{messages.msg_error}
+                                        
+                                            

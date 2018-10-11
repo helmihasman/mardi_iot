@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        include header.jade
+    body.hold-transition.skin-blue.sidebar-mini
+        .wrapper
+            include navigation.jade
+            if session.passport.user.user_right === "Administrator"
+             include sidebar.jade
+            else if session.passport.user.user_right === "Assets Operator"
+             include sidebar_normal.jade
+            else if session.passport.user.user_right === "Environment"
+             include sidebar_env.jade
+            else if session.passport.user.user_right === "Mcmc"
+             include sidebar_mcmc.jade
+            else
+             include sidebar_linen.jade
+            .content-wrapper
+                block content
+            include footer.jade
+            include js_env.jade

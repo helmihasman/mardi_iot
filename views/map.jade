@@ -1,0 +1,187 @@
+extends base
+block content 
+    section.content-header 
+        h1 
+            | Map
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Map 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Map
+                
+            .box-body
+                div(id="image-map")
+        
+        aside.control-sidebar.control-sidebar-dark.control-sidebar-close
+            // Create the tabs
+            // Tab panes
+            .tab-content
+                // Home tab content
+                h3.control-sidebar-heading Patient Room
+                
+                //<div id="display"> </div>
+                script(type='text/javascript',src='/socket.io/socket.io.js')
+                //script(type='text/javascript').
+                    var socket = io();
+                       socket.on('showrows', function(rows) {
+                         var html='';
+                         for (var i=0; i<rows.length; i++) {
+                           html += '<ul class="control-sidebar-menu"><li><a href="javascript:void(0)">'+
+                                   '<i class="menu-icon fa fa-map-pin bg-light-blue"></i><div class="menu-info">'+
+                                   '<h4 class="control-sidebar-subheading">'+rows[i].assets_rfid + '</h4><p>' + rows[i].assets_last_datetime + '</p></div></a></li></ul>';
+                         }  
+                         document.getElementById("display").innerHTML = html;
+                         console.log(rows);
+                       });
+                            
+ 
+                // /.control-sidebar-menu
+               
+              
+
+        .control-sidebar-bg(style='position: fixed; height: auto;')
+    
+
+    div.modal.fade(id="myModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+           div.modal-dialog(role="document")
+              div.modal-content
+                 div.modal-header
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true")
+                    h4.modal-title(id="myModalLabel")
+                     | ICU 1
+                 div.modal-body
+                       ul.products-list.product-list-in-box
+                        <div id="display"> </div>
+                        script(type='text/javascript',src='/socket.io/socket.io.js')
+                        script(type='text/javascript').
+                            //console.log("from pageeee");
+                            var socket = io();
+                             socket.on('showrows', function(rows) {
+                               //if(rows[i].assets_last_location === "reader_1"){
+                               //console.log("rows from page:"+rows.length);
+                               var html='';
+                               for (var i=0; i<rows.length; i++) {
+                                 var img = rows[i].assets_img_path;
+                                 if(rows[i].assets_img_path === "" || rows[i].assets_img_path === null){
+                                     img = "uploads/no_image.jpg";
+                                 }
+                                 var d = new Date(rows[i].assets_last_datetime);
+                                 d.setMinutes(d.getMinutes()+d.getTimezoneOffset());
+                                 var ddate = d.getDate();
+                                 var dmonth = d.getMonth()+1;
+                                 var dyear = d.getFullYear();
+                                 var dhour = d.getHours();
+                                 var dminutes = d.getMinutes();
+                                 var dseconds = d.getSeconds();
+                                 
+                                 if(ddate < 10){
+                                     ddate = "0"+ddate;
+                                 }
+                                 if(dmonth < 10){
+                                     dmonth = "0"+dmonth;
+                                 }
+                                 
+                                 if(dhour < 10){
+                                     dhour = "0"+dhour;
+                                 }
+                                 if(dminutes < 10){
+                                     dminutes = "0"+dminutes;
+                                 }
+                                 if(dseconds < 10){
+                                     dseconds = "0"+dseconds;
+                                 }
+                                 
+                                 
+                                 var newdate = ddate+"/"+dmonth+"/"+dyear+" "+dhour+":"+dminutes+":"+dseconds;
+                                 html += '<li class="item">'+
+                                             '<div class="product-img">'+
+                                                '<img src="'+img+'" alt="Asset Image"/></div>'+
+                                             '<div class="product-info">'+
+                                                '<a href="#" class="product-title">'+rows[i].assets_rfid+'<span class="product-description">'+newdate+'</span></a></div>'+
+                                         '</li><br>';
+                               }  
+                               document.getElementById("display").innerHTML = html;
+                               console.log(rows);
+                               // }
+                             });
+                          
+                 div.modal-footer
+                   button(type="button",class="btn btn-default",data-dismiss="modal")
+                     | Close
+                     
+    div.modal.fade(id="myModal2",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+           div.modal-dialog(role="document")
+              div.modal-content
+                 div.modal-header
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true")
+                    h4.modal-title(id="myModalLabel")
+                     | ICU 2
+                 div.modal-body
+                       ul.products-list.product-list-in-box
+                        <div id="display2"> </div>
+                        script(type='text/javascript',src='/socket.io/socket.io.js')
+                        script(type='text/javascript').
+                            //console.log("from pageeee22");
+                            var socket = io();
+                             socket.on('showrows2', function(rows) {
+                                //console.log("rows from page2:"+rows.length);
+                               //if(rows[i].assets_last_location === "reader_2"){
+                               var html='';
+                               for (var i=0; i<rows.length; i++) {
+                                 var img = rows[i].assets_img_path;
+                                 if(rows[i].assets_img_path === "" || rows[i].assets_img_path === null){
+                                     img = "uploads/no_image.jpg";
+                                 }
+                                 var d = new Date(rows[i].assets_last_datetime);
+                                 d.setMinutes(d.getMinutes()+d.getTimezoneOffset());
+                                 var ddate = d.getDate();
+                                 var dmonth = d.getMonth()+1;
+                                 var dyear = d.getFullYear();
+                                 var dhour = d.getHours();
+                                 var dminutes = d.getMinutes();
+                                 var dseconds = d.getSeconds();
+                                 
+                                 if(ddate < 10){
+                                     ddate = "0"+ddate;
+                                 }
+                                 if(dmonth < 10){
+                                     dmonth = "0"+dmonth;
+                                 }
+                                 
+                                 if(dhour < 10){
+                                     dhour = "0"+dhour;
+                                 }
+                                 if(dminutes < 10){
+                                     dminutes = "0"+dminutes;
+                                 }
+                                 if(dseconds < 10){
+                                     dseconds = "0"+dseconds;
+                                 }
+                                 
+                                 
+                                 var newdate = ddate+"/"+dmonth+"/"+dyear+" "+dhour+":"+dminutes+":"+dseconds;
+                                 html += '<li class="item">'+
+                                             '<div class="product-img">'+
+                                                '<img src="'+img+'" alt="Asset Image"/></div>'+
+                                             '<div class="product-info">'+
+                                                '<a href="#" class="product-title">'+rows[i].assets_rfid+'<span class="product-description">'+newdate+'</span></a></div>'+
+                                         '</li><br>';
+                               }  
+                               document.getElementById("display2").innerHTML = html;
+                               //console.log(rows);
+                                //}
+                             });
+                          
+                 div.modal-footer
+                   button(type="button",class="btn btn-default",data-dismiss="modal")
+                     | Close
+        

@@ -1,0 +1,78 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Users
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Users > Add Users
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Add Users
+                    
+            .box-body
+                form.form-horizontal(role='form',method='post' action='/admin_users/add')
+                  - if (messages.msg_error) 
+                                    .alert.alert-danger.alert-dismissable 
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert! 
+                                        | !{messages.msg_error}
+                  div.form-group
+                    label(for="username",class="col-sm-2 control-label") Username *
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="username",name="username",placeholder="Username",autofocus,required)
+                  div.form-group
+                    label(for="name",class="col-sm-2 control-label") Name *
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="name",name="name",placeholder="Name",required)
+                  div.form-group
+                    label(for="password",class="col-sm-2 control-label") Password *
+                    div.col-sm-6
+                      input(type="password",class="form-control",id="password",name="password",placeholder="Password",required)
+                  div.form-group
+                    label(for="email",class="col-sm-2 control-label") Email *
+                    div.col-sm-6
+                      input(type="email",class="form-control",id="email",name="email",placeholder="Email",required)
+                  div.form-group
+                    label(for="phone_no",class="col-sm-2 control-label") Phone No *
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="phone_no",name="phone_no",placeholder="Phone No",required)
+                  div.form-group
+                    label(for="staff_id",class="col-sm-2 control-label") Staff ID *
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="staff_id",name="staff_id",placeholder="Staff ID",required)
+                  div.form-group
+                    label(for="account_expiry",class="col-sm-2 control-label") Account Expiry *
+                    div.col-sm-6
+                      input(type="date",class="form-control",id="account_expiry",name="account_expiry",placeholder="Account Expiry",required)
+                  div.form-group
+                    label(for="user_role",class="col-sm-2 control-label",required) User Role *
+                    div.col-sm-6
+                      select(id="user_role",name="user_role",required).col-sm-6
+                        option(value="") Select One
+                        option(value="Administrator") Administrator
+                        option(value="Normal") Normal
+                  div.form-group
+                    label(for="user_right",class="col-sm-2 control-label") User Right *
+                    div.col-sm-6
+                      select(id="user_right",name="user_right",required).col-sm-6
+                        option(value="") Select One
+                        option(value="Administrator") Administrator
+                        option(value="Assets Operator") Assets Operator
+                        option(value="Linen Operator") Linen Operator
+                        option(value="Environment") Environment
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",name="save_btn",style="align:right") Save
+                      |&nbsp&nbsp&nbsp
+                      button(type="button",class="btn btn-danger",id="cancel_btn",style="align:right",onclick='goBack()') Cancel

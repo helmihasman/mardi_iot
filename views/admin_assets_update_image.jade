@@ -1,0 +1,41 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Assets
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Assets > Update Assets
+            
+    section.content
+      for row, index in data
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Update Assets
+                    
+            .box-body
+                form.form-horizontal(enctype="multipart/form-data",role='form',method='post' action='/admin_assets/update_image/#{row.assets_id}/#{row.assets_img_path}')
+                  - if (messages.msg_error) 
+                                    .alert.alert-danger.alert-dismissable 
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert! 
+                                        | !{messages.msg_error}
+                                        
+                  div.form-group
+                    label(for="rfid",class="col-sm-2 control-label") Image
+                    div.col-sm-6
+                      input(type="file",class="form-control",id="assets_img",name="assets_img",required)
+                  
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Save
+                      |&nbsp&nbsp&nbsp
+                      button(type="button",class="btn btn-danger",id="cancel_btn",style="align:right",onclick='goBack()') Cancel

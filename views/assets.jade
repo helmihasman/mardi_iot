@@ -1,0 +1,46 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Assets
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Assets 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Assets List&nbsp&nbsp
+                    
+                        
+            .box-body
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Tag Id
+                       th Assets Id
+                       th Assets Description
+                       th Department
+                       th Photo
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.assets_rfid}
+                                        td #{row.assets_no}
+                                        td #{row.assets_item_desc}
+                                        td #{row.dept_desc}
+                                        td 
+                                          if row.assets_img_path !== null
+                                             img(src='#{row.assets_img_path}',height='60', width='60')
+                                          else
+                                             img(src='uploads/no_image.jpg',height='60', width='60')
+                                            

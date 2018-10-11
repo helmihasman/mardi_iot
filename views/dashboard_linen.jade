@@ -1,0 +1,159 @@
+extends base_linen
+block content 
+    section.content-header 
+        h1 
+            | Linen
+            
+        ol.breadcrumb 
+            li 
+                a(href='#')
+                    i.fa.fa-dashboard
+                    | Linen
+                    input(type="text", value="#{JSON.stringify(graph_data)}",id="graph_data",hidden="true")
+                    input(type="text", value="#{JSON.stringify(graph_data2)}",id="graph_data17",hidden="true")
+            
+        div(style="overflow-x:auto")
+            table(class="table")
+                tr
+                    for row, index in top_data
+                        td
+                            div(style="width: 250px")
+                                div.small-box.bg-aqua-active
+                                    div.inner
+                                        h3 #{row.number}
+                                        h4 #{row.linen_category}
+                                        p Housekeeping Department
+                                    div.icon
+                                        i.fa.fa-info-circle
+                    //a(href="#",data-toggle="modal" data-target="#pillowcase").small-box-footer
+                        //| Edit Quantity
+
+                        
+
+        section.content
+            div.row
+                div.col-md-9
+                  div.box.box-primary
+                    div.box-header.with-border
+                      h3.box-title
+                       | Linen Scanned
+                    div.box-body
+                      div(id='container')
+                      center
+                       img(src='/adminlte/dist/img/legend.png',height='40px',width='300px') 
+
+                div.col-md-3
+                  div.box.box-primary
+                     div.box-header.with-border
+                       h3.box-title Recent Scan
+                     div.box-body
+                       ul.products-list.product-list-in-box
+                         for row, index in linen_scanned
+                          - console.log(row.clean+"---"+row.soil+"---"+row.iron);
+                          - var type="",tag_count;
+                          - if (row.clean !== 0) {type="Wash Linen";tag_count=row.clean;}
+                          - if (row.soil !== 0) {type="Dry Linen";tag_count=row.soil;}
+                          
+                            li.item
+                              div.product-img
+                                  img(src='uploads/price-tag.png',alt="Product Image")
+                                //img(src="#{row.assets_img_path}",alt="Product Image")
+                              div.product-info
+                                a.product-title #{row.new_date}
+                                  span.product-description #{tag_count}
+                                  span.product-description #{type}
+                           
+                      div.box-footer.text-center
+                        a.uppercase(href="/linen_soil") View All Linen Scanned
+        
+
+        div.modal.fade(id="pillowcase",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+           div.modal-dialog(role="document")
+              div.modal-content
+                 div.modal-header
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true")
+                    h4.modal-title(id="myModalLabel")
+                     | Pillow Case
+                 div.modal-body
+                    form.form-horizontal(role='form',method='post' action='/pillowcase/edit')
+                        div.form-group
+                          label(for="rfid",class="col-sm-2 control-label") Quantity
+                          div.col-sm-6
+                            input(type="text",class="form-control",id="pillowcase_q",name="pillowcase_q",placeholder="Quantity",required)
+                        div.form-group
+                            label(for="asset_owner",class="col-sm-2 control-label")
+                            div.col-sm-6
+                              button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Save
+                 div.modal-footer
+                   button(type="button",class="btn btn-default",data-dismiss="modal")
+                     | Close
+                     
+
+        div.modal.fade(id="gown",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+           div.modal-dialog(role="document")
+              div.modal-content
+                 div.modal-header
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true")
+                    h4.modal-title(id="myModalLabel")
+                     | Patient Gown
+                 div.modal-body
+                    form.form-horizontal(role='form',method='post' action='/gown/edit')
+                        div.form-group
+                          label(for="rfid",class="col-sm-2 control-label") Quantity
+                          div.col-sm-6
+                            input(type="text",class="form-control",id="gown_q",name="gown_q",placeholder="Quantity",required)
+                        div.form-group
+                            label(for="asset_owner",class="col-sm-2 control-label")
+                            div.col-sm-6
+                              button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Save
+                 div.modal-footer
+                   button(type="button",class="btn btn-default",data-dismiss="modal")
+                     | Close
+                     
+
+        div.modal.fade(id="blanket",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+           div.modal-dialog(role="document")
+              div.modal-content
+                 div.modal-header
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true")
+                    h4.modal-title(id="myModalLabel")
+                     | Blanket
+                 div.modal-body
+                    form.form-horizontal(role='form',method='post' action='/blanket/edit')
+                        div.form-group
+                          label(for="rfid",class="col-sm-2 control-label") Quantity
+                          div.col-sm-6
+                            input(type="text",class="form-control",id="blanket_q",name="blanket_q",placeholder="Quantity",required)
+                        div.form-group
+                            label(for="asset_owner",class="col-sm-2 control-label")
+                            div.col-sm-6
+                              button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Save
+                 div.modal-footer
+                   button(type="button",class="btn btn-default",data-dismiss="modal")
+                     | Close
+                     
+
+        div.modal.fade(id="bedsheet",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+           div.modal-dialog(role="document")
+              div.modal-content
+                 div.modal-header
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                    span(aria-hidden="true")
+                    h4.modal-title(id="myModalLabel")
+                     | Bed Sheet
+                 div.modal-body
+                    form.form-horizontal(role='form',method='post' action='/bed/edit')
+                        div.form-group
+                          label(for="rfid",class="col-sm-2 control-label") Quantity
+                          div.col-sm-6
+                            input(type="text",class="form-control",id="bed_q",name="bed_q",placeholder="Quantity",required)
+                        div.form-group
+                            label(for="asset_owner",class="col-sm-2 control-label")
+                            div.col-sm-6
+                              button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Save
+                 div.modal-footer
+                   button(type="button",class="btn btn-default",data-dismiss="modal")
+                     | Close

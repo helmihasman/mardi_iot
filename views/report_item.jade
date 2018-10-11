@@ -1,0 +1,50 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Report
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Report 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Report&nbsp&nbsp
+                    a.btn.btn-primary.btn-xs.btn-flata(href='/print_asset/#{type}', target="_blank")
+                      i.fa.fa-print
+                small.pull-right
+                   a(href='/report_home_asset') Back
+                        
+            .box-body    
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Assets Id
+                       th Assets Desc
+                       th Department
+                       th Photo
+                       th Current Location
+                       th Last Detected
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.assets_no}
+                                        td #{row.assets_item_desc}
+                                        td #{row.dept_desc}
+                                        td 
+                                          if row.assets_img_path !== null
+                                             img(src='#{row.assets_img_path}',height='60', width='60')
+                                          else
+                                             img(src='uploads/no_image.jpg',height='60', width='60')
+                                        td #{row.zone_name}
+                                        td #{row.new_date}

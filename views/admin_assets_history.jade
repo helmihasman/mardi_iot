@@ -1,0 +1,86 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Asset's History
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Asset's History
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Asset's History&nbsp&nbsp
+                        
+            .box-body
+                - if(messages.msg_info)
+                    .alert.alert-success.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-check
+                            | Success!
+                        | !{messages.msg_info}
+                - if(messages.msg_error)
+                    .alert.alert-danger.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-ban
+                            | Alert!
+                        | !{messages.msg_error}
+                        
+                //form(role="form")
+                  div.form-group
+                    label(for="asset_id",class="col-sm-2 control-label") Asset ID
+                    div.col-sm-4
+                      input(type="text",class="form-control",id="asset_id",placeholder="Asset ID")
+                  div.form-group
+                    label(for="tag_id",class="col-sm-2 control-label") Tag ID
+                    div.col-sm-4
+                      input(type="text",class="form-control",id="tag_id",placeholder="Tag ID")
+                      |&nbsp
+                  div.form-group
+                    label(for="description",class="col-sm-2 control-label") Description
+                    div.col-sm-4
+                      input(type="text",class="form-control",id="description",placeholder="Description")
+                  div.form-group
+                    div.col-sm-4
+                      button(type="button",class="btn btn-primary",id="submit_btn",style="align:right") Search
+                
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Tag Id
+                       th Assets Id
+                       th Assets Description
+                       th Department
+                       th Photo
+                       th Location
+                       th Time
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data
+                                  - var image_row = row.assets_img_path;
+                                  - var image = image_row.split("/");
+                                  - var f_image = "../../../uploads/"+image[1];
+                                    tr
+                                        td #{index+1}
+                                        td #{row.history_tag_id}
+                                        td #{row.history_assets_id}
+                                        td #{row.assets_item_desc}
+                                        td #{row.dept_desc}
+                                        td 
+                                          if row.assets_img_path !== null
+                                             img(src='#{f_image}',height='60', width='60')
+                                          else
+                                             img(src='uploads/no_image.jpg',height='60', width='60')
+                                        td #{row.zone_name}
+                                        td #{row.new_date}

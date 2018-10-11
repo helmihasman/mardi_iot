@@ -1,0 +1,106 @@
+aside.main-sidebar
+    section.sidebar
+        .user-panel
+            .pull-left.image
+                img(src='/adminlte/dist/img/user.png',alt='User Image').img-circle
+            .pull-left.info
+                p #{session.passport.user.username}
+                a(href='#')
+                    i.fa.fa-circle.text-success 
+                    | Online
+        form(action='#',method='get').sidebar-form
+            .input-group
+                span.input-group-btn
+                       
+        ul.sidebar-menu
+            li.treeview(class=(title === 'Dashboard' ? 'active' : ''))
+                a(href='/')
+                    i.fa.fa-laptop
+                    span
+                        | Assets
+                    span.pull-right-container
+                        
+                //ul.treeview-menu
+                    li(class=(title === 'Map' ? 'active' : ''))
+                        a(href='/map')
+                            i.fa.fa-circle-o
+                            | Map
+                    li(class=(title === 'Search' ? 'active' : ''))
+                        a(href='/search')
+                            i.fa.fa-circle-o
+                            | Search
+                    
+            
+            li.treeview(class=(title === 'Environment' ? 'active' : ''))
+                a(href='/environment')
+                    i.fa.fa-dashboard
+                    span
+                        | Environment
+                    span.pull-right-container
+            li.treeview(class=(title === 'Dashboard Linen' ? 'active' : ''))
+                a(href='/dashboard_linen')
+                    i.fa.fa-folder
+                    span
+                        | Linen
+                    span.pull-right-container
+            li.treeview(class=(title === 'Admin Users' ? 'active' :title === 'Add Admin Users' ? 'active' :title === 'Admin Department' ? 'active' :title === 'Add Admin Department' ? 'active' :title === 'Admin Assets' ? 'active' :title === 'Add Admin Assets' ? 'active' :title === 'Admin Monitoring' ? 'active' :title === 'Admin Gateway' ? 'active' :title === 'Admin Unauthorized' ? 'active':title === 'Admin Zone' ? 'active' :title === 'Add Admin Gateway' ? 'active' :title === 'Admin Linen' ? 'active' : ''))
+                a(href='#')
+                    i.fa.fa-laptop
+                    span
+                        | Admin
+                    span.pull-right-container
+                        i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                    li(class=(title === 'Admin Users' ? 'active' :title === 'Add Admin Users' ? 'active' : ''))
+                        a(href='/admin_users')
+                            i.fa.fa-circle-o
+                            | Users
+                    li(class=(title === 'Admin Department' ? 'active' :title === 'Add Admin Department' ? 'active' : ''))
+                        a(href='/admin_department')
+                            i.fa.fa-circle-o
+                            | Department
+                    li(class=(title === 'Admin Assets' ? 'active' :title === 'Add Admin Assets' ? 'active' : ''))
+                        a(href='/admin_assets')
+                            i.fa.fa-circle-o
+                            | Assets Management
+                    //li(class=(title === 'Admin Monitoring' ? 'active' : ''))
+                        a(href='/admin_monitoring')
+                            i.fa.fa-circle-o
+                            | Asset Monitoring
+                    li(class=(title === 'Admin Unauthorized' ? 'active' : ''))
+                        a(href='/admin_unauthorized')
+                            i.fa.fa-circle-o
+                            | Unauthorized Movements
+                    li(class=(title === 'Admin Gateway' ? 'active' :title === 'Add Admin Gateway' ? 'active' : ''))
+                        a(href='/admin_gateway')
+                            i.fa.fa-circle-o
+                            | Device Management
+                    li(class=(title === 'Admin Zone' ? 'active' :title === 'Add Zone' ? 'active' : ''))
+                        a(href='/admin_zone')
+                            i.fa.fa-circle-o
+                            | Zone Management
+                    li(class=(title === 'Admin Linen' ? 'active' :title === 'Add Linen' ? 'active' : ''))
+                        a(href='/admin_linen')
+                            i.fa.fa-circle-o
+                            | Linen Management
+                    li(class=(title === 'Audit Trail' ? 'active' :title === 'Audit Trail' ? 'active' : ''))
+                        a(href='/admin_audit')
+                            i.fa.fa-circle-o
+                            | Audit Trail
+            li.treeview(class=(title === 'Report' ? 'active' : ''))
+                a(href='#')
+                    i.fa.fa-pie-chart
+                    span
+                        | Report
+                    span.pull-right-container
+                        i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                    li(class=(title === 'Report Asset' ? 'active' :''))
+                        a(href='/report_home_asset')
+                            i.fa.fa-circle-o
+                            | Assets report
+                    li(class=(title === 'Report Linen' ? 'active' :''))
+                        a(href='/report_home_linen')
+                            i.fa.fa-circle-o
+                            | Linen report
+            

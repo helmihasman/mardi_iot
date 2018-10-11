@@ -1,0 +1,82 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Linen
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Linen > Update Linen
+            
+    section.content
+      for row, index in data
+       - var ddate = row.linen_purchase_date.getDate();
+       - var dmonth = row.linen_purchase_date.getMonth()+1;
+       - var dyear = row.linen_purchase_date.getFullYear();
+       - if(ddate < 10){ ddate = "0"+ddate;}
+       - if(dmonth < 10){dmonth = "0"+dmonth;}
+       - if(dhour < 10){dhour = "0"+dhour;}
+       - var newdate = dyear+"-"+dmonth+"-"+ddate;
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Update Linen
+                    
+            .box-body
+                form.form-horizontal(role='form',method='post' action='/admin_linen/update/#{row.linen_id}')
+                  - if (messages.msg_error) 
+                                    .alert.alert-danger.alert-dismissable 
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+                                            | ×
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert! 
+                                        | !{messages.msg_error}
+                  div.form-group
+                    label(for="tag_id",class="col-sm-2 control-label") Tag ID
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="tag_id",name="tag_id",placeholder="Tag ID",autofocus,value="#{row.linen_uuid}")
+                  div.form-group
+                    label(for="category",class="col-sm-2 control-label") Category
+                    div.col-sm-6
+                      select(id="category",name="category",value="#{row.linen_category}").col-sm-6
+                        option(value="#{row.linen_category}",selected) #{row.linen_category}
+                        option(value="") --------------------------------
+                        option(value="Pillow Case") Pillow Case
+                        option(value="Patient gown") Patient gown
+                        option(value="Curtain") Curtain
+                        option(value="Bedsheet") Bedsheet
+                        option(value="Baby cloth") Baby cloth
+                  div.form-group
+                    label(for="purchase_date",class="col-sm-2 control-label") Purchase Date
+                    div.col-sm-6
+                      input(type="date",class="form-control",id="purchase_date",name="purchase_date",value="#{newdate}")
+                  div.form-group
+                    label(for="color",class="col-sm-2 control-label",value="#{row.linen_color}") Color
+                    div.col-sm-6
+                      select(id="color",name="color").col-sm-6
+                        option(value="#{row.linen_color}",selected) #{row.linen_color}
+                        option(value="") --------------------------------
+                        option(value="Green") Green
+                        option(value="White") White
+                        option(value="Black") Black
+                        option(value="Pink") Pink
+                        option(value="Blue") Blue
+                  div.form-group
+                    label(for="size",class="col-sm-2 control-label",value="#{row.linen_size}") Size
+                    div.col-sm-6
+                      select(id="size",name="size").col-sm-6
+                        option(value="#{row.linen_size}") #{row.linen_size}
+                        option(value="") --------------------------------
+                        option(value="S") S
+                        option(value="M") M
+                        option(value="L") L
+                        option(value="XL") XL
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",name="save_btn",style="align:right") Save
+                      |&nbsp&nbsp&nbsp
+                      button(type="button",class="btn btn-danger",id="cancel_btn",style="align:right",onclick='goBack()') Cancel

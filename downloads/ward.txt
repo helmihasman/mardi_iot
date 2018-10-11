@@ -1,0 +1,33 @@
+Ward 6A
+Ward 6B
+Ward 5A
+Ward 5B
+Ward 5E
+Ward 4A
+Ward 4B
+Ward 4E
+Ward 3C
+Ward 3D
+Ward 3E
+Ward 2A
+Ward 2B
+Ward 2C
+Ward 2D
+Ward Surgical Day Care
+Wellness
+OT Level 4
+OT Level 3
+ICU/NICU
+HDU
+Rehab
+OPD Clinic Tower A & B
+Hand & Micro
+Medical Daycare
+Emergency Department
+X - Ray
+Endoscopy
+Oncology
+Labour & Delivery
+Dialysis
+Special Diagnostics
+Radiotrapy + Nurclear

@@ -1,0 +1,82 @@
+script(type='text/javascript', src='/adminlte/plugins/jQuery/jquery-2.2.3.min.js')
+script(type='text/javascript', src='/adminlte/bootstrap/js/bootstrap.min.js')
+script(type='text/javascript', src='/adminlte/plugins/datatables/jquery.dataTables.min.js')
+script(type='text/javascript', src='/adminlte/plugins/datatables/dataTables.bootstrap.min.js')
+script(type='text/javascript', src='/adminlte/plugins/slimScroll/jquery.slimscroll.min.js')
+script(type='text/javascript', src='/adminlte/plugins/fastclick/fastclick.js')
+script(type='text/javascript', src='/adminlte/dist/js/app.min.js')
+script(type='text/javascript', src='/adminlte/dist/js/demo.js')
+script(type='text/javascript',src='/socket.io/socket.io.js')
+script(type='text/javascript').
+    $(document).ready(function() {
+     $('#example').DataTable({
+         "scrollX": true
+     });
+    } );
+    
+    $(document).ready(function() {
+     $('#example2').DataTable({
+         "scrollX": true
+     });
+    } );
+    
+    
+    $(document).ready(function() {
+     $('#environment_table').DataTable({
+        "ordering": false,
+        "scrollX": true
+    } );
+    } );
+    
+    $(document).ready(function() {
+     var linentable1 = $('#linen_table1').DataTable({
+        language: { search: "" },
+        "iDisplayLength":31,
+        "bLengthChange": false,
+        "bPaginate": false,
+        "bInfo": false,
+        "scrollX": true
+    } );
+    
+    /*$('#month_select, #year_select').on('change', function() {
+        $('#save_btn').click(); 
+     });*/
+
+    var filter = document.getElementById("linen_table1_filter");
+    filter.style.display = 'none';
+    var startDateObj = document.getElementById("datepicker_from");
+    startDateObj.onchange = function()
+    {
+           //alert(startDateObj.value);
+           var newdate = startDateObj.value.split("-");
+           var getdate = newdate[2]+"-"+newdate[1]+"-"+newdate[0];
+           linentable1.search(getdate).draw();
+    };
+
+    
+    
+    } );
+    
+    $(document).ready(function() {
+    var linentable2 =  $('#linen_table2').DataTable({
+        language: { search: "" },
+        "scrollX": true
+    } );
+    
+    var filter = document.getElementById("linen_table2_filter");
+    filter.style.display = 'none';
+    var startDateObj = document.getElementById("datepicker_from2");
+    startDateObj.onchange = function()
+    {
+           //alert(startDateObj.value);
+           var newdate = startDateObj.value.split("-");
+           var getdate = newdate[2]+"-"+newdate[1]+"-"+newdate[0];
+           linentable2.search(getdate).draw();
+    };
+    
+    } );
+    
+script(type='text/javascript').
+  function goBack() {
+    window.history.back();
+    }

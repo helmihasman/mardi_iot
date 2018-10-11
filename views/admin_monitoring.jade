@@ -1,0 +1,59 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Assets Monitoring
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Assets Monitoring 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Assets Monitoring&nbsp&nbsp
+                         
+            .box-body
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Tag Id
+                       th Asset Id
+                       th Assets Description
+                       th Department
+                       th Photo
+                       th Last location
+                       th Last detected
+                       //th
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.assets_rfid}
+                                        td #{row.assets_no}
+                                        td #{row.assets_item_desc}
+                                        td #{row.dept_desc}
+                                        td 
+                                         if row.assets_img_path == null
+                                           img(src='uploads/no_image.jpg',height='60', width='60')
+                                         else
+                                           img(src='#{row.assets_img_path}',height='60', width='60')
+                                        td #{row.zone_name}
+                                        td #{row.assets_last_datetime.toLocaleString()}
+                                        //td
+                                            div(style='display:inline-block')
+                                                a(href='/admin_gateway/update/#{row.gateway_id}').btn.btn-sm.btn-primary
+                                                        i.fa.fa-edit
+                                            | 
+                                            div(style='display:inline-block')
+                                                form(method='post', action='/admin_gateway/delete/#{row.gateway_id}')
+                                                    input(type="hidden",name="_method", value="DELETE")
+                                                    button.btn.btn-sm.btn-danger(type='submit')
+                                                        i.fa.fa-remove

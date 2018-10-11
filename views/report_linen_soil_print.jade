@@ -1,0 +1,171 @@
+extends base_datatables_print
+block content 
+    section.content-header 
+        
+
+    section.content
+        .box
+          
+            .box-body
+                h3 Soil Linen Report for #{month_name+" "+year}
+                table(id="example",class="table table-bordered table-striped")
+                      thead
+                        tr
+                            th(width='5%') No
+                            th Day
+                            th Pillowcase, adult
+                            th Towel, cataract
+                            th Sheet, draw
+                            th Sheet, bed hostel
+                            th Sheet, cradle
+                            th Sheet, bed adult
+                            th Seluar, child ABC
+                            th Baju, child ABC
+                            th Seluar, adult female
+                            th Baju, adult male
+                            th Baju, IV drip
+                            th Baju, staff
+                            th Seluar, psychiatric female
+                            th Baju, baby newborn
+                            th Linen Protector (M)
+                            th Blanket, adult
+                            th Apron, kitchen
+                            th Seluar, staff OT
+                            th Baju, staff OT
+                            th Baju, maternity
+                            th Sarong, maternity
+                            th Sarong, adult male
+                            th Sheet, abdominal
+                            th Cover, mayo
+                            th Wrapper, single
+                            th Towel, ENT
+                            th Towel, D&C
+                            th Wrapper, double
+                            th Towel, dressing
+                          //th Details
+
+                      tbody
+                          if messages.msg_error
+                                   | !{messages.msg_error}
+                               else
+                                   for row, index in data
+                                      tr
+                                            td #{index+1}
+                                            td #{row.day+"-"+row.month+"-"+row.year}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Pillowcase, adult') 
+                                                     | #{row2.soil}   
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Towel, cataract') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Sheet, draw') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Sheet, bed hostel') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Sheet, cradle') 
+                                                     | #{row2.soil}   
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Sheet, bed adult') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Seluar, child ABC') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Baju, child ABC') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Seluar, adult female') 
+                                                     | #{row2.soil}   
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Baju, adult male') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Baju, IV drip') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Baju, staff') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Seluar, psychiatric female') 
+                                                     | #{row2.soil}   
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Baju, baby newborn') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Linen Protector (M)') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Blanket, adult') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Apron, kitchen') 
+                                                     | #{row2.soil}   
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Seluar, staff OT') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Baju, staff OT') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Baju, maternity') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Sarong, maternity') 
+                                                     | #{row2.soil}   
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Sarong, adult male') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Sheet, abdominal') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Cover, mayo') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Wrapper, single') 
+                                                     | #{row2.soil}   
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Towel, ENT') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Towel, D&C') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Wrapper, double') 
+                                                     | #{row2.soil}
+                                            td
+                                                for row2, index in row.list
+                                                    if(row2.category === 'Towel, dressing') 
+                                                     | #{row2.soil}
+

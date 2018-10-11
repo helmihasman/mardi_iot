@@ -1,0 +1,22 @@
+aside.main-sidebar
+    section.sidebar
+        .user-panel
+            .pull-left.image
+                img(src='/adminlte/dist/img/user.png',alt='User Image').img-circle
+            .pull-left.info
+                p #{session.passport.user.username}
+                a(href='#')
+                    i.fa.fa-circle.text-success 
+                    | Online
+        form(action='#',method='get').sidebar-form
+            .input-group
+                span.input-group-btn
+                       
+        ul.sidebar-menu
+            li.treeview(class=(title === 'Environment' ? 'active' : ''))
+                a(href='/environment')
+                    i.fa.fa-files-o
+                    span
+                        | Environment
+                    span.pull-right-container
+            

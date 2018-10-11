@@ -1,0 +1,77 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Linen
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Linen 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Clean Linen&nbsp&nbsp
+                    
+                        
+            .box-body
+              - var count1 = 1;
+              - var count2 = 1;
+                .nav-tabs-custom
+                    ul.nav.nav-tabs
+                      li
+                        a(href='/linen_soil') Soiled Linen
+                      li.active
+                        a(href='/linen_clean') Clean Linen
+                    
+                    p#date_filter.pull-right
+                            span#date-label-from.date-label Search by date: 
+                            input#datepicker_from.date_range_filter.date(type='date')
+                        table(id="linen_table1",class="table table-bordered table-striped")
+                            thead
+                              tr
+                                th(width='5%',rowspan='2') No
+                                th(rowspan='2') Day
+                                th(colspan='2',style='align:centre') Clean
+                                th(colspan='2') Soil
+                            
+                              tr
+                                
+                                th Bedsheet
+                                th Pillow Case
+                                th Bedsheet
+                                th Pillow Case
+                                //th Details
+
+                            tbody
+                                if messages.msg_error
+                                         | !{messages.msg_error}
+                                     else
+                                         for row, index in data
+                                            tr
+                                                td #{count1++}
+                                                td #{row.day+"-"+row.month+"-"+row.year}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === ' Bedsheet') 
+                                                         | #{row2.clean}
+                                                        
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === ' Pillow Case') 
+                                                         | #{row2.clean}
+                                                          
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === ' Bedsheet') 
+                                                         | #{row2.soil}
+                                                        
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === ' Pillow Case') 
+                                                         | #{row2.soil}
+                                                         
+                     

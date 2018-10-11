@@ -1,0 +1,136 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Assets
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Assets > Add Assets
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Add Assets
+                    
+            .box-body
+                form.form-horizontal(enctype="multipart/form-data",role='form',method='post' action='/admin_assets/add')
+                  div.form-group
+                    label(for="rfid",class="col-sm-2 control-label") Image
+                    div.col-sm-6
+                      input(type="file",class="form-control",id="assets_img",name="assets_img",required)
+                  div.form-group
+                    label(for="rfid",class="col-sm-2 control-label") RFID
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="rfid",name="rfid",placeholder="RFID",required)
+                  div.form-group
+                    label(for="type",class="col-sm-2 control-label") Type
+                    div.col-sm-6
+                      select(id="inventory_type",name="inventory_type",required).col-sm-6
+                        option(value="BEMS") BEMS
+                        option(value="FEMS") FEMS
+                  div.form-group
+                    label(for="asset_no",class="col-sm-2 control-label") Asset No
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="asset_no",name="asset_no",placeholder="Asset No",required)
+                  div.form-group
+                    label(for="dept_code",class="col-sm-2 control-label") Dept Code
+                    div.col-sm-6
+                      select(id="dept_code",name="dept_code",required).col-sm-6
+                        for row, index in department 
+                         - console.log("department in ui ="+row.dept_id);
+                         - console.log("department in ui ="+row.dept_desc);
+                          option(value="#{row.dept_id}") #{row.dept_desc}
+                  div.form-group
+                    label(for="type",class="col-sm-2 control-label") Zone RFID
+                    div.col-sm-6
+                      select(id="zone_rfid",name="zone_rfid",required).col-sm-6
+                        for row, index in zone 
+                          option(value="#{row.zone_id}") #{row.zone_name}
+                  div.form-group
+                    label(for="room_code",class="col-sm-2 control-label") Room Code
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="room_code",name="room_code",placeholder="Room Code",required)
+                  div.form-group
+                    label(for="room_desc",class="col-sm-2 control-label") Room Desc
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="room_desc",name="room_desc",placeholder="Room Desc",required)
+                  div.form-group
+                    label(for="item_desc",class="col-sm-2 control-label") Item Desc
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="item_desc",name="item_desc",placeholder="Item Desc",required)
+                  div.form-group
+                    label(for="manufacturer",class="col-sm-2 control-label") Manufacturer
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="manufacturer",name="manufacturer",placeholder="Manufacturer",required)
+                  div.form-group
+                    label(for="make",class="col-sm-2 control-label") Make
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="make",name="make",placeholder="Make",required)
+                  div.form-group
+                    label(for="model",class="col-sm-2 control-label",required) Model
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="model",name="model",placeholder="Model",required)
+                  div.form-group
+                    label(for="brand",class="col-sm-2 control-label") Brand
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="brand",name="brand",placeholder="Brand",required)
+                  div.form-group
+                    label(for="serial_no",class="col-sm-2 control-label") Serial No
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="serial_no",name="serial_no",placeholder="Serial No",required)
+                  div.form-group
+                    label(for="supplier",class="col-sm-2 control-label") Supplier
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="supplier",name="supplier",placeholder="Supplier",required)
+                  div.form-group
+                    label(for="type_code",class="col-sm-2 control-label") Type Code
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="type_code",name="type_code",placeholder="Type Code",required)
+                  div.form-group
+                    label(for="warranty_start",class="col-sm-2 control-label") Warranty Start
+                    div.col-sm-6
+                      input(type="date",class="form-control",id="warranty_start",name="warranty_start",placeholder="Warranty Start",required)
+                  div.form-group
+                    label(for="warranty_end",class="col-sm-2 control-label") Waranty End
+                    div.col-sm-6
+                      input(type="date",class="form-control",id="warranty_end",name="warranty_end",placeholder="Warranty End",required)
+                  div.form-group
+                    label(for="acceptance_date",class="col-sm-2 control-label") Acceptance Date
+                    div.col-sm-6
+                      input(type="date",class="form-control",id="acceptance_date",name="acceptance_date",placeholder="Acceptance Date",required)
+                  div.form-group
+                    label(for="task_code",class="col-sm-2 control-label") Task Code
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="task_code",name="task_code",placeholder="Task Code",required)
+                  div.form-group
+                    label(for="frequency",class="col-sm-2 control-label") Frequency
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="frequency",name="frequency",placeholder="Frequency",required)
+                  div.form-group
+                    label(for="order_no",class="col-sm-2 control-label") Order No
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="order_no",name="order_no",placeholder="Order No",required)
+                  div.form-group
+                    label(for="warranty",class="col-sm-2 control-label") Warranty
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="warranty",name="warranty",placeholder="Warranty",required)
+                  div.form-group
+                    label(for="variation",class="col-sm-2 control-label") Variation
+                    div.col-sm-6
+                      input(type="text",class="form-control",id="variation",name="variation",placeholder="Variation",required)
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label") Asset Owner
+                    div.col-sm-6
+                      select(id="asset_owner",name="asset_owner",required).col-sm-6
+                        option(value="Admin") Admin
+                        option(value="Admin2") Admin2
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Save
+                      |&nbsp&nbsp&nbsp
+                      button(type="button",class="btn btn-danger",id="cancel_btn",style="align:right",onclick='goBack()') Cancel

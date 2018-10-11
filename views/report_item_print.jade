@@ -1,0 +1,44 @@
+extends base_datatables_print
+block content 
+    section.content-header 
+       
+            
+        
+            
+    section.content
+        .box
+            
+                        
+            .box-body    
+                h3 Assets Report
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Assets Id
+                       th Assets Desc
+                       th Department
+                       th Photo
+                       th Current Location
+                       th Last Detected
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data
+                                  -  var image_row,image,f_image;
+                                  - if(row.assets_img_path !== null ) {image_row = row.assets_img_path;
+                                  - image = image_row.split("/");
+                                  - f_image = "../../../uploads/"+image[1];}
+                                    tr
+                                        td #{index+1}
+                                        td #{row.assets_no}
+                                        td #{row.assets_item_desc}
+                                        td #{row.dept_desc}
+                                        td 
+                                          if row.assets_img_path !== null
+                                             img(src='#{f_image}',height='60', width='60')
+                                          else
+                                             img(src='../../../uploads/no_image.jpg',height='60', width='60')
+                                        td #{row.zone_name}
+                                        td #{row.new_date}

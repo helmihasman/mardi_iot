@@ -1,0 +1,69 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Device
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Device 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Device List&nbsp&nbsp
+                    a.btn.btn-primary.btn-xs.btn-flata(href='/admin_gateway_add')
+                      i.fa.fa-plus
+                        
+            .box-body
+                - if(messages.msg_info)
+                    .alert.alert-success.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-check
+                            | Success!
+                        | !{messages.msg_info}
+                - if(messages.msg_error)
+                    .alert.alert-danger.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-ban
+                            | Alert!
+                        | !{messages.msg_error}
+                table(id="example",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       th No
+                       th Device Name
+                       th Description
+                       th Location
+                       th IP Address
+                       th Mac Address
+                       th Action
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data 
+                                    tr
+                                        td #{index+1}
+                                        td #{row.gateway_name}
+                                        td #{row.gateway_desc}
+                                        td #{row.zone_name}
+                                        td #{row.gateway_ip_add}
+                                        td #{row.gateway_mac_add}
+                                        td
+                                            div(style='display:inline-block')
+                                                a(href='/admin_gateway/update/#{row.gateway_id}').btn.btn-sm.btn-primary
+                                                        i.fa.fa-edit
+                                            | 
+                                            div(style='display:inline-block')
+                                                form(method='post', action='/admin_gateway/delete/#{row.gateway_id}')
+                                                    input(type="hidden",name="_method", value="DELETE")
+                                                    button.btn.btn-sm.btn-danger(type='submit',onclick="return confirm('Are you sure you want to delete?');")
+                                                        i.fa.fa-remove

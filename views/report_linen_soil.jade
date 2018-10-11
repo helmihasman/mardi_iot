@@ -1,0 +1,221 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Report
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Report 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Soil Linen&nbsp&nbsp
+                    a.btn.btn-primary.btn-xs.btn-flata(href='/report_linen_soil_print/#{dmonth}/#{dyear}', target="_blank")
+                      i.fa.fa-print
+                small.pull-right
+                   a(href='/report_home_linen') Back
+                    
+                        
+            .box-body
+                p#date_filter.pull-right
+                            span#date-label-from.date-label Search by date: 
+                            input#datepicker_from.date_range_filter.date(type='date')
+                            
+                p#date_filter.pull-left
+                        form.form-horizontal(role='form',method='post' action='/report_home_linen_sort')
+                          div.form-group
+                            select(id="month_select",name="month_select") 
+                                option(value="#{dmonth}") #{month_name}
+                                option(value="--------------") --------------
+                                option(value="1") January
+                                option(value="2") February
+                                option(value="3") March
+                                option(value="4") April
+                                option(value="5") May
+                                option(value="6") June
+                                option(value="7") July
+                                option(value="8") August
+                                option(value="9") September
+                                option(value="10") October
+                                option(value="11") November
+                                option(value="12") December
+                            select(id="year_select",name="year_select")
+                                option(value="#{dyear}") #{dyear}
+                                option(value="--------------") --------------
+                                option(value="2017") 2017
+                                option(value="2018") 2018
+                                option(value="2019") 2019
+                                option(value="2020") 2020
+                                option(value="2021") 2021
+                                option(value="2022") 2022
+                            input#linen_type(type='text',name='linen_type',value='#{linen_type}',hidden)
+                            button(type="submit",id="save_btn") Search
+                table(id="linen_table1",class="table table-bordered table-striped")
+                            thead
+                              tr
+                                th(width='5%') No
+                                th Day
+                                th Pillowcase, adult
+                                th Towel, cataract
+                                th Sheet, draw
+                                th Sheet, bed hostel
+                                th Sheet, cradle
+                                th Sheet, bed adult
+                                th Seluar, child ABC
+                                th Baju, child ABC
+                                th Seluar, adult female
+                                th Baju, adult male
+                                th Baju, IV drip
+                                th Baju, staff
+                                th Seluar, psychiatric female
+                                th Baju, baby newborn
+                                th Linen Protector (M)
+                                th Blanket, adult
+                                th Apron, kitchen
+                                th Seluar, staff OT
+                                th Baju, staff OT
+                                th Baju, maternity
+                                th Sarong, maternity
+                                th Sarong, adult male
+                                th Sheet, abdominal
+                                th Cover, mayo
+                                th Wrapper, single
+                                th Towel, ENT
+                                th Towel, D&C
+                                th Wrapper, double
+                                th Towel, dressing
+                                th Details
+
+                            tbody
+                                if messages.msg_error
+                                         | !{messages.msg_error}
+                                     else
+                                         for row, index in data
+                                            tr
+                                                td #{index+1}
+                                                td #{row.day+"-"+row.month+"-"+row.year}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Pillowcase, adult') 
+                                                         | #{row2.soil}   
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Towel, cataract') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Sheet, draw') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Sheet, bed hostel') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Sheet, cradle') 
+                                                         | #{row2.soil}   
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Sheet, bed adult') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Seluar, child ABC') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Baju, child ABC') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Seluar, adult female') 
+                                                         | #{row2.soil}   
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Baju, adult male') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Baju, IV drip') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Baju, staff') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Seluar, psychiatric female') 
+                                                         | #{row2.soil}   
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Baju, baby newborn') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Linen Protector (M)') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Blanket, adult') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Apron, kitchen') 
+                                                         | #{row2.soil}   
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Seluar, staff OT') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Baju, staff OT') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Baju, maternity') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Sarong, maternity') 
+                                                         | #{row2.soil}   
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Sarong, adult male') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Sheet, abdominal') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Cover, mayo') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Wrapper, single') 
+                                                         | #{row2.soil}   
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Towel, ENT') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Towel, D&C') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Wrapper, double') 
+                                                         | #{row2.soil}
+                                                td
+                                                    for row2, index in row.list
+                                                        if(row2.category === 'Towel, dressing') 
+                                                         | #{row2.soil}
+                                                td
+                                                    a(href='/linen_soil_detail/#{row.day}/#{row.month}/#{row.year}') Show Details
+                                        
+                                            

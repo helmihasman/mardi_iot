@@ -1,0 +1,45 @@
+aside.main-sidebar
+    section.sidebar
+        .user-panel
+            .pull-left.image
+                img(src='/adminlte/dist/img/user.png',alt='User Image').img-circle
+            .pull-left.info
+                p #{session.passport.user.username}
+                a(href='#')
+                    i.fa.fa-circle.text-success 
+                    | Online
+        form(action='#',method='get').sidebar-form
+            .input-group
+                span.input-group-btn
+                       
+        ul.sidebar-menu
+            li.treeview(class=(title === 'Dashboard' ? 'active' : ''))
+                a(href='/')
+                    i.fa.fa-laptop
+                    span
+                        | Assets
+                    span.pull-right-container
+                        
+                //ul.treeview-menu
+                    li(class=(title === 'Map' ? 'active' : ''))
+                        a(href='/map')
+                            i.fa.fa-circle-o
+                            | Map
+                    li(class=(title === 'Search' ? 'active' : ''))
+                        a(href='/search')
+                            i.fa.fa-circle-o
+                            | Search
+                    
+            
+            li.treeview(class=(title === 'Environment' ? 'active' : ''))
+                a(href='/environment')
+                    i.fa.fa-dashboard
+                    span
+                        | Environment
+                    span.pull-right-container
+            li.treeview(class=(title === 'Settings' ? 'active' : ''))
+                    a(href='/admin_users/update/#{session.passport.user.users_id}')
+                        i.fa.fa-edit
+                        span
+                            | Settings
+                        span.pull-right-container  

@@ -1,0 +1,220 @@
+extends base_env
+block content 
+    section.content-header 
+        h1 
+            | Environment
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Environment 
+            
+    section.content
+        div.row
+            input(type="text", value="#{JSON.stringify(graph_data)}",id="graph_data",hidden="true")
+            script(type='text/javascript',src='/socket.io/socket.io.js')
+            script(type='text/javascript').
+                    var socket = io();
+                     socket.on('environment', function(rows) {
+                         //console.log("from pageeee22442");
+                        //console.log("rows from page2:"+rows.length);
+                       //if(rows[i].assets_last_location === "reader_2"){
+                       
+                       for (var i=0; i<rows.length; i++) {
+                         
+                         if(rows[i].location_env === 'ICU'){
+                         document.getElementById("loc_1_temp").innerHTML = "Temperature ("+rows[i].location_env+")";
+                         document.getElementById("loc_1_humidity").innerHTML = "Humidity ("+rows[i].location_env+")";
+                         document.getElementById("loc_1_tvoc").innerHTML = "TVOC ("+rows[i].location_env+")";
+                         
+                         if(rows[i].air_q_env === '0.000 ' || rows[i].air_q_env === 0.000){
+                         document.getElementById("loc_1_air_q").innerHTML = "CO2 ("+rows[i].location_env+") ";
+                            }
+                          else{
+                              //alert("else-- "+rows[i].air_q_env);
+                         document.getElementById("loc_1_air_q").innerHTML = "CO2 ("+rows[i].location_env+")";
+                            }
+                            
+                         if(rows[i].co_env === '0.00' || rows[i].co_env === 0.00){
+                         document.getElementById("loc_1_co2").innerHTML = "CO ("+rows[i].location_env+") *No CO gas detected";
+                            }
+                         else{
+                          document.getElementById("loc_1_co2").innerHTML = "CO ("+rows[i].location_env+")";      
+                            }
+                         document.getElementById("temperature_1").innerHTML = rows[i].temp_env+" °C";
+                         document.getElementById("humidity_1").innerHTML = rows[i].humidity_env+" %";
+                         document.getElementById("air_q_1").innerHTML = rows[i].co2_env+" ppm";
+                         document.getElementById("co2_1").innerHTML = rows[i].co_env+" ppm";
+                         document.getElementById("tvoc_1").innerHTML = rows[i].tvoc_env+" ppb";
+                         }
+                         
+                         if(rows[i].location_env === 'LAB'){
+                         /*document.getElementById("loc_2_temp").innerHTML = "Temperature (LAB)";
+                         document.getElementById("loc_2_humidity").innerHTML = "Humidity (LAB)";
+                         document.getElementById("loc_2_air_q").innerHTML = "Air Quality (LAB)";
+                         document.getElementById("loc_2_co2").innerHTML = "CO (LAB)";
+                         document.getElementById("temperature_2").innerHTML = rows[i].temp_env+" °C";
+                         document.getElementById("humidity_2").innerHTML = rows[i].humidity_env+" %";
+                         document.getElementById("air_q_2").innerHTML = rows[i].air_q_env+" mg/m3";
+                         document.getElementById("co2_2").innerHTML = rows[i].co_env+" ppm";*/
+                         
+                         /*document.getElementById("loc_2_temp").innerHTML = "Temperature ("+rows[i].location_env+")";
+                         document.getElementById("loc_2_humidity").innerHTML = "Humidity ("+rows[i].location_env+")";
+                         document.getElementById("loc_2_air_q").innerHTML = "Air Quality ("+rows[i].location_env+")";
+                         document.getElementById("loc_2_co2").innerHTML = "CO2 ("+rows[i].location_env+")";
+                         document.getElementById("temperature_2").innerHTML = rows[i].temp_env+" °C";
+                         document.getElementById("humidity_2").innerHTML = rows[i].humidity_env+" %";
+                         document.getElementById("air_q_2").innerHTML = rows[i].air_q_env+" mg/m3";
+                         document.getElementById("co2_2").innerHTML = rows[i].co_env+" ppm";*/
+                         }
+                         
+                         /*else if(rows[i].location_env === 'LAB 2'){
+                         document.getElementById("loc_3_temp").innerHTML = "Temperature ("+rows[i].location_env+")";
+                         document.getElementById("loc_3_humidity").innerHTML = "Humidity ("+rows[i].location_env+")";
+                         document.getElementById("loc_3_air_q").innerHTML = "Air Quality ("+rows[i].location_env+")";
+                         document.getElementById("loc_3_co2").innerHTML = "CO2 ("+rows[i].location_env+")";
+                         document.getElementById("temperature_3").innerHTML = rows[i].temp_env+" °C";
+                         document.getElementById("humidity_3").innerHTML = rows[i].humidity_env+" %";
+                         document.getElementById("air_q_3").innerHTML = rows[i].air_q_env+" mg/m3";
+                         document.getElementById("co2_3").innerHTML = rows[i].co_env+" ppm";
+                         }*/
+                       }  
+                       //console.log(rows);
+                        //}
+                     });
+            //for row, index in environment
+            //location 1 
+            div.col-lg-4.col-xs-6
+                div.small-box.bg-aqua-active
+                    div.inner
+                        //h3(id='temperature') #{row.temp_env}
+                        h3(id='temperature_1') 00.00 °C
+                        p(id='loc_1_temp') Temperature
+                    div.icon
+                        i.fa.fa-thermometer-half
+                    a(href='/environment_detail').small-box-footer
+                        | More info
+                        i.fa.fa-arrow-circle-right
+            
+            div.col-lg-4.col-xs-6
+                 div.small-box.bg-aqua
+                    div.inner
+                        //h3(id='humidity') #{row.humidity_env}
+                        h3(id='humidity_1') 00.00 %
+                        p(id='loc_1_humidity') Humidity
+                    div.icon
+                        i.fa.fa-tint
+                    a(href='/environment_detail').small-box-footer
+                        | More info
+                        i.fa.fa-arrow-circle-right
+                        
+            div.col-lg-4.col-xs-6
+                div.small-box.bg-aqua-active
+                    div.inner
+                        //h3(id='air_q') #{row.air_q_env}
+                        h3(id='air_q_1') 0.00 ppm
+                        p(id='loc_1_air_q') C02
+                    div.icon
+                        i.fa.fa-area-chart
+                    a(href='/environment_detail').small-box-footer
+                        | More info
+                        i.fa.fa-arrow-circle-right
+                        
+            div.col-lg-4.col-xs-6
+                div.small-box.bg-aqua
+                    div.inner
+                        //h3(id='co2') #{row.co_env}
+                        h3(id='co2_1') 00.00 ppm
+                        p(id='loc_1_co2') CO
+                    div.icon
+                        i.fa.fa-bar-chart
+                    a(href='/environment_detail').small-box-footer
+                        | More info
+                        i.fa.fa-arrow-circle-right
+            
+            
+                        
+            div.col-lg-4.col-xs-6
+                div.small-box.bg-aqua
+                    div.inner
+                        //h3(id='temperature') #{row.temp_env}
+                        h3(id='tvoc_1') 00.00 ppb
+                        p(id='loc_1_tvoc') TVOC
+                    div.icon
+                        i.fa.fa-thermometer-half
+                    a(href='/environment_detail').small-box-footer
+                        | More info
+                        i.fa.fa-arrow-circle-right
+            
+            
+            
+
+        section.content
+            div.row
+                div.col-md-6
+                  div.box.box-primary
+                    div.box-header.with-border
+                      h3.box-title
+                       | Temperature
+                    div.box-body
+                      div.chart
+                        canvas(id="barChartTemp",style="height:250px")
+                div.col-md-6
+                  div.box.box-primary
+                    div.box-header.with-border
+                      h3.box-title
+                       | Humidity
+                    div.box-body
+                      div.chart
+                        canvas(id="barChartHum",style="height:250px")
+                        
+            div.row
+                div.col-md-6
+                  div.box.box-primary
+                    div.box-header.with-border
+                      h3.box-title
+                       | CO2
+                    div.box-body
+                      div.chart
+                        canvas(id="barChartAir",style="height:250px")
+                div.col-md-6
+                  div.box.box-primary
+                    div.box-header.with-border
+                      h3.box-title
+                       | CO
+                    div.box-body
+                      div.chart
+                        canvas(id="barChartCo",style="height:250px")
+            div.row
+                div.col-md-6
+                  div.box.box-primary
+                    div.box-header.with-border
+                      h3.box-title
+                       | TVOC
+                    div.box-body
+                      div.chart
+                        canvas(id="barChartTvoc",style="height:250px")
+                
+            //div.row
+                div.col-md-12
+                  // Custom Tabs
+                  div.nav-tabs-custom
+                    ul.nav.nav-tabs
+                      li.active
+                        a(href='#tab_1', data-toggle='tab') Tab 1
+                      li
+                        a(href='#tab_2', data-toggle='tab') Tab 2
+                      li
+                        a(href='#tab_3', data-toggle='tab') Tab 3
+                      
+                    .tab-content
+                      #tab_1.tab-pane.active
+                        div.chart
+                          canvas(id="areaChart",style="height:250px")
+                      #tab_2.tab-pane
+                        div.chart
+                          canvas(id="areaChart",style="height:250px")
+                      #tab_3.tab-pane
+                        div.chart
+                          canvas(id="areaChart",style="height:250px")    

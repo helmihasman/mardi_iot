@@ -1,0 +1,57 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Environment
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Environment 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Environment&nbsp&nbsp
+                    
+                        
+            .box-body
+                //- console.log("paaggee = "+JSON.stringify(data));
+                //- console.log("paaggee = "+data[0].value.payload.tag_1.tag_id);
+                - console.log("paaggee 232= "+JSON.stringify(data));
+                table(id="environment_table",class="table table-bordered table-striped")
+                   thead
+                     tr
+                       
+                       th Time
+                       th Temperature
+                       th Humidity
+                       th CO2
+                       th CO
+                       th TVOC
+                       th Location
+
+                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row,index in data
+                                    tr
+                                        
+                                       td #{row.new_date}
+                                       if(row.temp_env < 19 || row.temp_env > 22)
+                                        td(style='color:red') #{row.temp_env+" °C"}
+                                       else
+                                        td #{row.temp_env+" °C"}
+                                       if(row.humidity_env < 50 || row.humidity_env > 65)
+                                        td(style='color:red') #{row.humidity_env+" %"}
+                                       else
+                                        td #{row.humidity_env+" %"}
+                                       td #{row.co2_env+" ppm"}
+                                       td #{row.co_env+" ppm"}
+                                       td #{row.tvoc_env+" ppb"}
+                                       td #{row.location_env}
+                                        
+                                            

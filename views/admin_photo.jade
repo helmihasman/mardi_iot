@@ -1,0 +1,38 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Gateway
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Gateway 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Gateway List&nbsp&nbsp
+                    a.btn.btn-primary.btn-xs.btn-flata(href='/admin_gateway_add')
+                      i.fa.fa-plus
+                        
+            .box-body
+                - if(messages.msg_info)
+                    .alert.alert-success.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-check
+                            | Success!
+                        | !{messages.msg_info}
+                - if(messages.msg_error)
+                    .alert.alert-danger.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | ×
+                        h4
+                            i.icon.fa.fa-ban
+                            | Alert!
+                        | !{messages.msg_error}
+                img(src='/uploads/assets_img-1486524694915.jpg')

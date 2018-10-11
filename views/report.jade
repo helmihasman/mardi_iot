@@ -1,0 +1,92 @@
+extends base_datatables
+block content 
+    section.content-header 
+        h1 
+            | Report
+            
+        ol.breadcrumb 
+            li 
+                a(href='#') 
+                    i.fa.fa-dashboard
+                    | Report 
+            
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Report
+                
+                    
+                        
+            .box-body
+               
+                form.form-horizontal(role='form',method='post' action='/report')
+                  div.form-group
+                    label(class="col-sm-4 control-label") Please select only one type of report to show
+                    
+                  div.form-group
+                    label(for="type",class="col-sm-2 control-label") Item List
+                    div.col-sm-6
+                      select(id="item_type",name="item_type").col-sm-6
+                        option(value="0") Select option
+                        option(value="BEMS") BEMS
+                        option(value="FEMS") FEMS
+                  div.form-group
+                    label(for="type",class="col-sm-2 control-label") Linen Report
+                    div.col-sm-6
+                      select(id="linen_type",name="linen_type").col-sm-6
+                        option(value="0") Select option
+                        option(value="daily") Daily report
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      button(type="submit",class="btn btn-primary",id="save_btn",style="align:right") Show report
+                  div.form-group
+                    label(for="asset_owner",class="col-sm-2 control-label")
+                    div.col-sm-6
+                      if messages.msg_error
+                          !{messages.msg_error}
+                      
+//                table(id="example",class="table table-bordered table-striped")
+//                   thead
+//                     tr
+//                       th No
+//                       th Assets Id
+//                       th Assets Desc
+//                       th Department
+//                       th Photo
+//                       th Current Location
+//                       th Last Detected
+//                   tbody
+                       if messages.msg_error
+                                | !{messages.msg_error}
+//                            else
+//                                for row, index in data 
+//                                    tr
+//                                        td #{index+1}
+//                                        td #{row.assets_no}
+//                                        td #{row.assets_item_desc}
+//                                        td #{row.dept_desc}
+//                                        td 
+//                                          if row.assets_img_path !== null
+//                                             img(src='#{row.assets_img_path}',height='60', width='60')
+//                                          else
+//                                             img(src='uploads/no_image.jpg',height='60', width='60')
+//                                        td #{row.assets_last_location}
+//                                        td #{row.assets_last_datetime.toLocaleString()}
+//                                         //- new Intl.DateTimeFormat('en-US').format(row.assets_last_datetime)
+//                                        //td #{row.assets_last_datetime}
+//                                            //div(style='display:inline-block')
+//                                                a(href='/admin_assets/update/#{row.assets_id}').btn.btn-sm.btn-primary
+//                                                        i.fa.fa-edit
+//                                            //| 
+//                                            
+//                                            //div(style='display:inline-block')
+//                                                a(href='/admin_assets/update_image/#{row.assets_id}').btn.btn-sm.btn-success
+//                                                        i.fa.fa-image
+//                                            //| 
+//                                            //div(style='display:inline-block')
+//                                                form(method='post', action='/admin_assets/delete/#{row.assets_id}')
+//                                                    input(type="hidden",name="_method", value="DELETE")
+//                                                    button.btn.btn-sm.btn-danger(type='submit')
+//                                                        i.fa.fa-remove
